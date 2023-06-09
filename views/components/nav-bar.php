@@ -67,7 +67,13 @@
 // Let's define some constant variables, shall we ?
 
 
-// Using our lovely null coalescing operator (i.e. ??):
+// Using our lovely null coalescing operator (i.e. ??):i
+
+// use the home controller 
+use Maxaboom\Controllers\HomeController;
+
+// Create a new instance of the home controller as `hc`
+$hc = new HomeController();
 
 // Get the route of side bar as `navbarRoute`
 $navbarRoute = $_GET['navbar_route'] ?? 'home';
@@ -81,30 +87,32 @@ $navbarIsConnected = $_GET['navbar_connected'] ?? false;
 
 $LogoIsHome = $_GET['logo_is_home'] ?? false;
 
-$cartTotal = $_GET['cart_total'] ?? 0;
+$cartTotal = $_GET['cart_total'] ?? $hc->getCartCount() ?? 0;
 
 // Create a default array of titles for the nav bar as `defaultNavbarTitles`
 $defaultNavbarTitles = [
-  'dashboard' => 'Open your Dashboard',
-  'home' => 'Go to Home',
-  'account' => 'See your Account',
-  'cart' => 'View Cart',
-  'likes' => 'Checkout Likes',
-  'users' => 'See all Users',
-  'products' => 'See all Products'
+  'dashboard' => $hc->i18n->getString('dashboardHint'),
+  'home' => $hc->i18n->getString('homeHint'),
+  'account' => $hc->i18n->getString('accountHint'),
+  'cart' => $hc->i18n->getString('cartHint'),
+  'likes' => $hc->i18n->getString('likesHint'),
+  'users' => $hc->i18n->getString('usersHint'),
+  'products' => $hc->i18n->getString('usersHint'),
+  'search' => $hc->i18n->getString('searchHint'),
 ];
 
 
 
 // Create a default array of labels for the nav bar as `defaultNavbarLabels`
 $defaultNavbarLabels = [
-  'dashboard' => 'Dashboard',
-  'home' => 'Home',
-  'account' => 'Account',
-  'cart' => 'Cart',
-  'likes' => 'Likes',
-  'users' => 'Users',
-  'products' => 'Products'
+  'dashboard' => $hc->i18n->getString("dashboard"),
+  'home' => $hc->i18n->getString('home'),
+  'account' => $hc->i18n->getString('account'),
+  'cart' => $hc->i18n->getString('cart'),
+  'likes' => $hc->i18n->getString('likes'),
+  'users' => $hc->i18n->getString('users'),
+  'products' => $hc->i18n->getString('products'),
+  'search' => $hc->i18n->getString('search'),
 ];
 
 // Get the titles
@@ -126,10 +134,10 @@ $navbarLabels = $_GET['navbar_labels'] ?? $defaultNavbarLabels;
 <!-- PHP (1): ...show an admin side-bar -->
 
 <!-- Admin Nav Bar -->
-<nav id="navBar" class="admin nav-bar flex-layout horizontal">
+<nav id="navBar" class="admin nav-bar flex-layout horizontal center">
 
   <!-- Dashboard - Nav-Link [disabled] -->
-  <a title="<?= $navbarTitles['dashboard'] ?>" href="dashboard" class="nav-link" <?= ($navbarRoute == 'dashboard') ? 'active' : '' ?>>
+  <a title="<?= $navbarTitles['dashboard'] ?>" href="admin" class="nav-link" <?= ($navbarRoute == 'dashboard') ? 'active' : '' ?>>
     <span class="material-icons nav-icon">dashboard</span>
     <span class="nav-label"><?= $navbarLabels['dashboard'] ?></span>
   </a>
@@ -172,7 +180,7 @@ $navbarLabels = $_GET['navbar_labels'] ?? $defaultNavbarLabels;
 
 
 <!-- Default Nav Bar -->
-<nav id="navBar" class="nav-bar flex-layout horizontal" <?= ($navbarIsConnected) ? 'connected' : '' ?>>
+<nav id="navBar" class="nav-bar flex-layout horizontal center" <?= ($navbarIsConnected) ? 'connected' : '' ?>>
 
   <!-- Home - Nav-Link -->
   <a title="<?= $navbarTitles['home'] ?>" href="home" class="nav-link" <?= ($navbarRoute == 'home') ? 'active' : '' ?>>
@@ -181,6 +189,15 @@ $navbarLabels = $_GET['navbar_labels'] ?? $defaultNavbarLabels;
   </a>
   <!-- End of Home Nav-Link -->
   
+ 
+  <!-- Search - Nav-Link -->
+  <a title="<?= $navbarTitles['search'] ?>" href="search" class="nav-link" <?= ($navbarRoute == 'search') ? 'active' : '' ?>>
+    <span class="material-icons nav-icon">search</span>
+    <span class="nav-label"><?= $navbarLabels['search'] ?></span>
+  </a>
+  <!-- End of Search Nav-Link -->
+
+
   <!-- Likes - Nav-Link -->
   <a title="<?= $navbarTitles['likes'] ?>" href="likes" class="nav-link" <?= ($navbarRoute == 'likes') ? 'active' : '' ?>>
     <span class="material-icons nav-icon">favorite_outline</span>

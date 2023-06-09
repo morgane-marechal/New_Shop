@@ -209,6 +209,17 @@ export class MaxaboomApp {
 
   // PUBLIC METHODS
 
+
+  /**
+   * Reloads the app
+   *
+   * @returns { void }
+   */
+  reload() {
+    window.location.reload();
+  }
+
+
   /**
    * Method used to display a toast message with the given `params`
    * NOTE: This method will automatically hide the toast after the given `timeout` (in seconds)
@@ -298,7 +309,60 @@ export class MaxaboomApp {
 
   }
 
-  
+  /**
+   * Method used to update the theme of the app.
+   * NOTE: This method changes the class of the body element to include the given `theme`
+   *
+   * @param { String } theme
+   */
+  updateTheme(theme) {
+    // Remove all themes from body
+    document.body.classList.remove('light', 'dark');
+    // add the `theme` to the body's class list
+    document.body.classList.add(theme);
+    // update the `theme` property
+    this.theme = theme;
+  }
+
+
+  /**
+   * Updates the language of the app.
+   * NOTE: This method changes the `lang` attribute/property of the `<html>` element to the given `languageId`
+   *
+   * @param { String } languageId - The language id to update to (eg. 'en', 'fr', 'es', 'de', etc.)
+   */
+  updateLanguage(languageId) {
+    // Set the `lang` property of `html` or documentElement to the given `languageId`
+    document.documentElement.lang = languageId;
+
+    // update the `lang` property 
+    this.lang = languageId;
+  }
+
+
+  /**
+   * Method used to update the cart count of the app.
+   * NOTE: This method updates the badge in side bar
+   *
+   * @param { Number } count - The new cart count
+   */
+  updateCartCount(count) {
+    // console.info('looooo count => ', count, this.cartBadgeEls);
+    // do nothing if there's no cart badge element or no count
+    //if (!this.cartBadgeEl || typeof count === 'undefined') { return }
+
+    // loop through `cartBadgEls`
+    this.cartBadgeEls.forEach((cartBadgeEl) => {
+      // hide or show the cart badge element depending on the given `count`
+      cartBadgeEl.hidden = (count === 0);
+      
+      // set the cart badge element's text content to the given `count`
+      cartBadgeEl.textContent = count;
+    });
+
+
+    console.log(`\x1b[40m\x1b[33m[updateCartCount]: count => ${count} & cartBadgeEls => \x1b[0m`, this.cartBadgEls);
+  }
 
   /**
    * Method used to show the menu with the given `menuId`
@@ -984,6 +1048,7 @@ export class MaxaboomApp {
 
   // PUBLIC GETTERS
 
+  
   /**
    * Returns the current page
    *
@@ -1110,6 +1175,16 @@ export class MaxaboomApp {
 
 
   /**
+   * Returns a list of all the nav link elements
+   * 
+   * @returns { NodeList } - A list of all the nav link elements
+   */
+  get navLinkEls() {
+    return document.querySelectorAll('.nav-link');
+  }
+
+
+  /**
    * Returns the main toasts element.
    * NOTE: This is the `<div class="toasts">` element inside the `<main>` element.
    * 
@@ -1181,6 +1256,15 @@ export class MaxaboomApp {
    */
   get asideEl() {
     return document.querySelector('body > aside');
+  }
+
+  /**
+   * Returns a the currently visible badge element of the cart
+   *
+   * @returns { NodeList }
+   */
+  get cartBadgeEls() {
+    return document.querySelectorAll('.nav-link .badge');
   }
 
   // === Checkers ===
@@ -1538,7 +1622,14 @@ export class MaxaboomApp {
       this._notifyInputEl(inputEl);
     });
 
+
+    // loop through all nav link elements, and install a click event listener on each of them
+    this.navLinkEls.forEach((navLinkEl) => {
+      navLinkEl.addEventListener('click', this._navLinkClickHandler.bind(this));
+    });
+
   }
+
 
 
   // PRIVATE SETTERS
@@ -1569,6 +1660,7 @@ export class MaxaboomApp {
       <!-- End of Toast -->
     `;
   }
+
 
 
   /**
@@ -1714,6 +1806,33 @@ export class MaxaboomApp {
     // DEBUG [4dbsmaster]: tell me about it ;)
     console.log(`\x1b[33m[_notifyInputEl] (1): inputEl => \x1b[0m`, inputEl);
     console.log(`\x1b[33m[_notifyInputEl] (2): labelEl => \x1b[0m`, labelEl);
+  }
+
+
+  /**
+   * Handler that is called whenever a nav-link is clicked
+   *
+   * @param { PointerEvent } event
+   *
+   */
+  _navLinkClickHandler(event) {
+    // get the nav-link element as `navLinkEl`
+    const navLinkEl = event.currentTarget;
+
+    // check if the nav-link is active
+    let isNavLinkActive = navLinkEl.hasAttribute('active');
+
+    // if the nav-link is active...
+    if (isNavLinkActive) {
+      // ...prevent the default behavior of the event
+      event.preventDefault();
+
+      // scroll the main app-layout to the top
+      this.mainAppLayout.scrollTop = 0;
+
+      // ...and do nothing else #forNow ;)
+      return;
+    }
   }
 
 

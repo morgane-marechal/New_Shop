@@ -130,3 +130,51 @@ $router->map('POST', '/account/[a:action]', function($action): void {
 
 
 
+// =========================
+// ====== `PATH` routes ====
+// =========================
+
+
+/**
+ * Route used to patch or update the user's theme preference
+ *
+ * @method PATCH
+ */
+$router->map('PATCH', '/account/theme/[a:themeId]', function(string $themeId) {
+
+  // create an object of `AccountController` class
+  $accountController = new AccountController();
+  
+  // update the theme with the `themeId`
+  $accountController->updateTheme($themeId);
+
+  // get the controller's response
+  $response = $accountController->getResponse();
+
+  // send the response back as json
+  echo json_encode($response);
+});
+
+
+
+
+/**
+ * Route used to patch or update the user's lang preference
+ *
+ * @method PATCH
+ */
+$router->map('PATCH', '/account/language/[a:languageId]', function(string $languageId) {
+
+  // create an object of `AccountController` class
+  $accountController = new AccountController();
+  
+  // update the theme with the `languageId`
+  $accountController->updateLanguage($languageId);
+
+  // get the controller's response
+  $response = $accountController->getResponse();
+
+  // send the response back as json
+  echo json_encode($response);
+});
+

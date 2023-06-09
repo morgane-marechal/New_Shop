@@ -63,6 +63,12 @@
 * !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 */
 
+// use the home controller 
+use Maxaboom\Controllers\HomeController;
+
+// Create a new instance of the home controller as `hc`
+$hc = new HomeController();
+
 
 // Let's define some constant variables, shall we ?
 
@@ -81,33 +87,36 @@ $sidebarIsConnected = $_GET['sidebar_connected'] ?? false;
 
 $LogoIsHome = $_GET['logo_is_home'] ?? false;
 
-$cartTotal = $_GET['cart_total'] ?? 0;
+$cartTotal = $_GET['cart_total'] ?? $hc->getCartCount() ?? 0;
 
 // Create a default array of titles for the side bar as `defaultSidebarTitles`
 $defaultSidebarTitles = [
   'maxaboom' => 'Maxaboom ❤️',
-  'profile' => 'Your Profile',
-  'auth' => 'Login / Register',
-  'dashboard' => 'Open your Dashboard',
-  'home' => 'Go to Home',
-  'account' => 'See your Account',
-  'cart' => 'View Cart',
-  'likes' => 'Checkout Likes',
-  'users' => 'See all Users',
-  'products' => 'See all Products'
+  'profile' => $hc->i18n->getString('profileHint'),
+  'auth' => $hc->i18n->getString('authHint'),
+  'login' => $hc->i18n->getString('loginHint'),
+  'dashboard' => $hc->i18n->getString('dashboardHint'),
+  'home' => $hc->i18n->getString('homeHint'),
+  'account' => $hc->i18n->getString('accountHint'),
+  'cart' => $hc->i18n->getString('cartHint'),
+  'likes' => $hc->i18n->getString('likesHint'),
+  'users' => $hc->i18n->getString('usersHint'),
+  'products' => $hc->i18n->getString('usersHint'),
+  'search' => $hc->i18n->getString('searchHint'),
 ];
 
 
 
 // Create a default array of labels for the side bar as `defaultSidebarLabels`
 $defaultSidebarLabels = [
-  'dashboard' => 'Dashboard',
-  'home' => 'Home',
-  'account' => 'Account',
-  'cart' => 'Cart',
-  'likes' => 'Likes',
-  'users' => 'Users',
-  'products' => 'Products'
+  'dashboard' => $hc->i18n->getString("dashboard"),
+  'home' => $hc->i18n->getString('home'),
+  'account' => $hc->i18n->getString('account'),
+  'cart' => $hc->i18n->getString('cart'),
+  'likes' => $hc->i18n->getString('likes'),
+  'users' => $hc->i18n->getString('users'),
+  'products' => $hc->i18n->getString('products'),
+  'search' => $hc->i18n->getString('search'),
 ];
 
 // Get the titles
@@ -133,7 +142,7 @@ $sidebarLabels = $_GET['sidebar_labels'] ?? $defaultSidebarLabels;
 <nav id="sideBar" class="admin flex-layout vertical">
   <!-- Icon-Wrapper -->
   <a title="Dashboard" 
-    href="admin/dashboard"
+    href="admin"
     class="nav-link icon-wrapper" <?= ($LogoIsHome && (($sidebarRoute == 'home') || ($sidebarRoute == 'dashboard')))  ? 'active' : '' ?>>
 
     <!-- App-Logo -->
@@ -146,7 +155,7 @@ $sidebarLabels = $_GET['sidebar_labels'] ?? $defaultSidebarLabels;
   <span flex></span>
 
   <!-- Dashboard - Nav-Link [disabled] -->
-  <a title="<?= $sidebarTitles['dashboard'] ?>" href="dashboard" class="nav-link" <?= ($sidebarRoute == 'dashboard') ? 'active' : '' ?>>
+  <a title="<?= $sidebarTitles['dashboard'] ?>" href="admin" class="nav-link" <?= ($sidebarRoute == 'dashboard') ? 'active' : '' ?>>
     <span class="material-icons nav-icon">dashboard</span>
     <span class="nav-label"><?= $sidebarLabels['dashboard'] ?></span>
   </a>
@@ -223,13 +232,21 @@ $sidebarLabels = $_GET['sidebar_labels'] ?? $defaultSidebarLabels;
     <span class="nav-label"><?= $sidebarLabels['home'] ?></span>
   </a>
   <!-- End of Home Nav-Link -->
-  
+
+  <!-- Search - Nav-Link -->
+  <a title="<?= $sidebarTitles['search'] ?>" href="search" class="nav-link" <?= ($sidebarRoute == 'search') ? 'active' : '' ?>>
+    <span class="material-icons nav-icon">search</span>
+    <span class="nav-label"><?= $sidebarLabels['search'] ?></span>
+  </a>
+  <!-- End of Search Nav-Link -->
+
   <!-- Likes - Nav-Link -->
   <a title="<?= $sidebarTitles['likes'] ?>" href="likes" class="nav-link" <?= ($sidebarRoute == 'likes') ? 'active' : '' ?>>
     <span class="material-icons nav-icon">favorite_outline</span>
     <span class="nav-label"><?= $sidebarLabels['likes'] ?></span>
   </a>
   <!-- End of Likes Nav-Link -->
+
 
 
   <!-- Cart - Nav-Link -->
@@ -269,9 +286,9 @@ $sidebarLabels = $_GET['sidebar_labels'] ?? $defaultSidebarLabels;
 
   <!-- + PHP(2): If the side bar *IS NOT CONNECTED* ...-->
   <?php else: ?>
-  <!-- + PHP(2): ...show person icon with link to 'auth' page -->
+  <!-- + PHP(2): ...show person icon with link to 'login' page -->
 
-  <a title="<?= $sidebarTitles['auth'] ?>" href="auth" class="nav-link profile">
+  <a title="<?= $sidebarTitles['auth'] ?>" href="login" class="nav-link profile">
     <span class="material-icons nav-icon">person</span>
   </a>
 

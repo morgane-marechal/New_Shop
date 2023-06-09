@@ -49,6 +49,14 @@ namespace Maxaboom\Controllers;
 
 // use the `User` model
 use Maxaboom\Models\User;
+// use the `Product` model
+use Maxaboom\Models\Product;
+// use the `Category` model
+use Maxaboom\Models\Category;
+// use the `Cart` model
+use Maxaboom\Models\Cart;
+
+
 // use the `Controller` & `ResponseHandler` helper classes
 use Maxaboom\Controllers\Helpers\Controller;
 use Maxaboom\Controllers\Helpers\ResponseHandler;
@@ -74,10 +82,31 @@ class HomeController extends Controller {
   // pages
   const PAGE_HOME = 'home';
 
+  // sections
+  const HERO_PRODUCTS_LIMIT = 5; // <- the number of products to display in the hero section
+  const LATEST_PRODUCTS_LIMIT = 8; // <- the number of products to display in the latest products section
+  const POPULAR_PRODUCTS_LIMIT = 8; // <- the number of products to display in the popular products section
+  const CHEAPEST_PRODUCTS_LIMIT = 8; // <- the number of products to display in the cheapest products section
+
+  // top categories
+  const TOP_CATEGORY_PIANOS = 'pianos';
+  const TOP_CATEGORY_GUITARS = 'guitars';
+  const TOP_CATEGORY_DRUMS = 'percussion';
+  const TOP_CATEGORY_VIOLINS = 'violin';
+  const TOP_CATEGORY_DJ = 'dj';
+  const TOP_CATEGORY_WIND_INSTRUMENTS = 'wind-instruments';
+
+  // defaults
+  const DEFAULT_AVG_RATING = 4.5; // <- the default average rating to use when there is no rating
+  const DEFAULT_NB_COMMENTS = 0; // <- the default number of comments to use when there is no comment  
+
   // declare some properties...
 
   // private properties
   private User $user;
+  private Product $product;
+  private Category $category;
+  private Cart $cart;
 
 
   // public properties
@@ -101,9 +130,12 @@ class HomeController extends Controller {
 
     // TODO: write something awesome code here ;)
     
-    // initialize the `user` property by creating a new `User` object
+    // instantiate some models 
     $this->user = new User();
-    
+    $this->product = new Product();
+    $this->category = new Category();
+    $this->cart = new Cart();
+     
     
     // DEBUG [4dbsmaster]: tell me about the `user` property and display all the users
     // var_dump($this->user); 
@@ -114,8 +146,106 @@ class HomeController extends Controller {
 
   // PUBLIC SETTERS
   // PUBLIC GETTERS
+
+  /**
+   * Method used to return a greeting based on the current hour
+   *
+   * @param string $timezone : the timezone to use
+   *
+   * @return string
+   */
+  public function getCurrentGreeting($timezone = 'Europe/Paris'): string {
+    // set the default timezone
+    date_default_timezone_set($timezone);
+
+    // get the current hour
+    $currentHour = (int) date('H');
+
+    /* DEBUG [4dbsmaster]: tell me about the current hour */
+    // var_dump($currentHour);
+    
+    // return the greeting based on the current hour
+    if ($currentHour >= 0 && $currentHour < 12) {
+      return $this->i18n->getString('gm');
+    } else if ($currentHour >= 12 && $currentHour < 18) {
+      return $this->i18n->getString('ga');
+    } else {
+      return $this->i18n->getString('ge');
+    }
+  }
+
+
+  /**
+   * Returns a list of the top categories
+   * 
+   * @param int $limit : the number of categories to return
+   *
+   * @return array 
+   */
+  public function getTopCategories($limit = 6): array {
+    // get all the categories from the database
+    $categories = $this->category->getAllCategories();
+    // slice `categories` to get only the first `$limit` categories as `topCategories`
+    $topCategories = array_slice($categories, 0, $limit);
+    
+    // return `topCategories`
+    return $topCategories;
+  }
+
+
+  /**
+   * Returns a list of the easy-to-follow steps of Maxaboom ;)
+   *
+   * @return array 
+   */
+  public function getSteps(): array {
+    // Create an multi-dimensional array of steps as `result` and return it
+    $result = Array(
+      
+      [ 
+        "id" => "search", 
+        "title" => $this->i18n->getString('stepSearchTitle'),
+        "description" => $this->i18n->getString('stepSearchDescription'),
+      ], // <- step 1: search
+
+
+      [ 
+        "id" => "tap", 
+        "title" => $this->i18n->getString('stepTapTitle'),
+        "description" => $this->i18n->getString('stepTapDescription'),
+      ], // <- step 2: tap
+
+
+      [ 
+        "id" => "play", 
+        "title" => $this->i18n->getString('stepPlayTitle'),
+        "description" => $this->i18n->getString('stepPlayDescription'),
+      ] // <- step 3: play
+
+
+    );
+
+    // return the result
+    return $result;
+  }
+
   // PUBLIC METHODS
 
+  /**
+   * Method used to get the total number of the cart products
+   * NOTE: If the user is connected, the total will be retrieved from the database
+   * NOTE: If the user is not connected, the total will be retrieved from the `cart` session variable
+   *
+   * @return int : the total number of the cart products
+   *
+   * @return int
+   */
+  public function getCartCount(): int {
+    // get the cart count from the cart model
+    return $this->user->isConnected() ? $this->cart->countAll($this->user->id) : count($_SESSION['cart'] ?? []);
+  }
+
+  
 
   /**
    * Shows the splash screen
@@ -156,6 +286,35 @@ class HomeController extends Controller {
    */
   public function showHomePage(): void {
     // TODO: do something awesome here before showing the home page ;)
+
+    // get 5 random products from the database as `$heroProducts`
+    $heroProducts = $this->product->getRandomProducts($this::HERO_PRODUCTS_LIMIT);
+
+    // get all steps as `$steps`
+    $steps = $this->getSteps();
+    
+    // get top categories as `$topCategories`
+    $topCategories = $this->getTopCategories();
+
+    // get a list of the latest products as `$latestProducts`
+    $latestProducts = $this->product->getLatestProducts($this::LATEST_PRODUCTS_LIMIT);
+    // $latestProducts = $this->product->getProductsByDate($this::LATEST_PRODUCTS_LIMIT);
+
+    $cartCount = $this->getCartCount();
+    
+    // DEBUG [4dbsmaster]: tell me about it ;)
+    // var_dump($latestProducts);
+
+    // TODO: get a list of the most popular products as `$popularProducts`
+    $popularProducts = $this->product->getPopularProducts($this::POPULAR_PRODUCTS_LIMIT);
+    // $popularProducts = [];
+    
+    // TODO: get a list of the cheapest products as `$cheapestProducts`
+    // $cheapestProducts = $this->product->getCheapestProducts($this::CHEAPEST_PRODUCTS_LIMIT);
+    $cheapestProducts = $this->product->getProductLowerPrice($this::CHEAPEST_PRODUCTS_LIMIT);
+    
+    // DEBUG [4dbsmaster]: tell me about it ;)
+    //var_dump($topCategories);
 
     // require [once] the home page from the `views` folder
     require_once __DIR__ . '/../views/home-page.php';
@@ -279,7 +438,7 @@ class HomeController extends Controller {
    */
   private function getCurrentTimestamp(): int {
     // TODO: Do something awesome here to get the current timestamp
-
+    
     return time(); // <- For now... super simple, isn't it? 😜
   }
 

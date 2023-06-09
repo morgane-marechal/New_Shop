@@ -32,7 +32,7 @@ class Product extends Database
 
         try {
 
-            $query = "SELECT *, products.name as productName FROM `products` INNER JOIN categories ON products.categories_id = categories.id WHERE products.id = '$productId'";
+            $query = "SELECT *, products.name as productName FROM `products` INNER JOIN categories ON products.category_id = categories.id WHERE products.id = '$productId'";
             $pdo_stmt = $this->db->query($query, PDO::FETCH_ASSOC);
 
             $result = $pdo_stmt->fetch();
@@ -41,7 +41,9 @@ class Product extends Database
             $productData = $result;
 
         } catch (PDOException $e) {
-            // TODO: handle the exception
+          // TODO: handle the exception
+          echo $e->getMessage();
+          die();
         }
 
         return $productData;
@@ -105,7 +107,7 @@ class Product extends Database
      */
     
     public function getProductsByCategoryId(int $categoryId){
-        $productsCategories = $this->db->prepare("SELECT * FROM products WHERE categories_id=$categoryId");
+        $productsCategories = $this->db->prepare("SELECT * FROM products WHERE category_id=$categoryId");
         $productsCategories->execute([
         ]);
         $result = $productsCategories->fetchAll(PDO::FETCH_ASSOC);
@@ -141,7 +143,7 @@ class Product extends Database
 
 
     public function getProductsBySubCategoryId(int $subCategoryId){
-        $subCategories = $this->db->prepare("SELECT * FROM products WHERE sub_categories_id=$subCategoryId");
+        $subCategories = $this->db->prepare("SELECT * FROM products WHERE sub_category_id=$subCategoryId");
         $subCategories->execute([]);
         $result = $subCategories->fetchAll(PDO::FETCH_ASSOC);
         return $result;
@@ -150,18 +152,18 @@ class Product extends Database
 
 
 
-    public function registerProduct($name,$description, $price, $categories_id, $sub_categories_id, $stock){
+    public function registerProduct($name,$description, $price, $category_id, $sub_category_id, $stock){
         $created_at = date('Y-m-d H:i:s');
-        $sql = "INSERT INTO products (name, description, price, categories_id,
-        sub_categories_id, created_at, stock)
-                VALUES (:name, :description, :price, :categories_id, :sub_categories_id, :created_at, :stock)";
+        $sql = "INSERT INTO products (name, description, price, category_id,
+        sub_category_id, created_at, stock)
+                VALUES (:name, :description, :price, :category_id, :sub_category_id, :created_at, :stock)";
         $sql_exe = $this->db->prepare($sql);
         $sql_exe->execute([
             'name' => htmlspecialchars($name),
             'description' => htmlspecialchars($description),
             'price' => htmlspecialchars($price),
-            'categories_id' => htmlspecialchars($categories_id),
-            'sub_categories_id' => htmlspecialchars($sub_categories_id),
+            'category_id' => htmlspecialchars($category_id),
+            'sub_category_id' => htmlspecialchars($sub_category_id),
             'created_at' => $created_at,
             'stock' => htmlspecialchars($stock)
         ]);         
@@ -173,18 +175,18 @@ class Product extends Database
     }
 
     //update specific product
-    public function updateProduct($id, $name,$description, $price, $categories_id, $sub_categories_id, $stock){
+    public function updateProduct($id, $name,$description, $price, $category_id, $sub_category_id, $stock){
         $update_at = date('Y-m-d H:i:s');
-        $sql = "UPDATE products SET name = :name, description = :description, price = :price, categories_id = :categories_id,
-        sub_categories_id = :sub_categories_id, update_at = :update_at, stock = :stock WHERE id = :id";
+        $sql = "UPDATE products SET name = :name, description = :description, price = :price, category_id = :category_id,
+        sub_category_id = :sub_category_id, update_at = :update_at, stock = :stock WHERE id = :id";
         $sql_exe = $this->db->prepare($sql);
         $sql_exe->execute([
             'id' => $id,
             'name' => htmlspecialchars($name),
             'description' => htmlspecialchars($description),
             'price' => htmlspecialchars($price),
-            'categories_id' => htmlspecialchars($categories_id),
-            'sub_categories_id' => htmlspecialchars($sub_categories_id),
+            'category_id' => htmlspecialchars($category_id),
+            'sub_category_id' => htmlspecialchars($sub_category_id),
             'update_at' => $update_at,
             'stock' => htmlspecialchars($stock)
         ]);         
@@ -215,10 +217,9 @@ class Product extends Database
     }
 
     
-    function getProductByDate(int $limit = 10){
+    function getProductsByDate(int $limit = 10){
         $allProducts = $this->db->prepare("SELECT * FROM products ORDER BY created_at DESC LIMIT $limit");
-        $allProducts->execute([
-        ]);
+        $allProducts->execute([]);
         $result = $allProducts->fetchAll(PDO::FETCH_ASSOC);
         return $result;
     }
@@ -264,27 +265,38 @@ class Product extends Database
         return $results['deleted_at'];
     }
 
+
     function getLatestProducts($limit){
-        $sql = "SELECT * 
-                FROM products 
-                INNER JOIN categories 
-                ON categories_id = categories.id  
-                ORDER BY created_at 
-                DESC 
-                LIMIT 1";
-        $sql->$this->db->execute();
-        $results = $sql->fetch(PDO::FETCH_ASSOC);
+        $sql_exe = $this->db->prepare("SELECT * FROM products WHERE deleted_at IS NULL ORDER BY created_at DESC LIMIT $limit");
+        $sql_exe->execute([]);
+        $results = $sql_exe->fetchAll(PDO::FETCH_ASSOC);
         return $results;
     }
 
-    function getMostPopularProducts($limit){
-        $sql = "SELECT avg(ratings) 
+
+    function getAvgRatings($productsId){
+        $sql_exe = $this->db->prepare("SELECT * avg(ratings), count(comments.id)
                 FROM comments 
                 INNER JOIN products 
                 ON comments.product_id = products.id 
-                WHERE products.id = 1";
-        $sql->$this->db->execute();
-        $results = $sql->fetch(PDO::FETCH_ASSOC);
+                WHERE products.id = $productsId");
+        $sql_exe->execute([]);
+        $results = $sql_exe->fetchAll(PDO::FETCH_ASSOC);
+        return $results;
+    }
+
+    function getPopularProducts($limit){
+        $sql_exe = $this->db->prepare("
+        SELECT products.*, avg(comments.ratings) AS avg_rating, COUNT(comments.id) AS nb_comments
+        FROM products 
+        INNER JOIN comments
+        ON products.id = comments.product_id 
+        GROUP BY products.id 
+        ORDER BY avg_rating DESC
+        LIMIT $limit");
+        $sql_exe->execute([]);
+        $results = $sql_exe->fetchAll(PDO::FETCH_ASSOC);
+        return $results;
     }
 
     public function productsCount(){
@@ -295,22 +307,45 @@ class Product extends Database
         return $result;
     }
 
-    public function GetProductByName($string, $limite, $category_id){
+    public function getProductByName($string, int $limite = 10, ?int $category_id = null){
+        $sql = "SELECT id, name FROM products WHERE name LIKE '%{$string}%' LIMIT $limite";
 
-        if($category_id){
-        $sql = "SELECT id, name FROM products WHERE name LIKE '%$string%'
-        AND categories_id = $category_id LIMIT $limite ";
-        }else{
-            $sql = "SELECT id, name FROM products WHERE name LIKE '%$string%'
-             LIMIT $limite ";
-        }
-            $sql_exe = $this->db->prepare($sql);
-            $sql_exe->execute([
-            ]); 
-        $results = $sql_exe->fetch(PDO::FETCH_ASSOC); 
+        $sql_exe = $this->db->prepare($sql);
+        $sql_exe->execute([]);
+
+        $results = $sql_exe->fetchAll(PDO::FETCH_ASSOC);
         return $results;
     }
 
+    /**
+     * Method used to get random products from the database
+     *
+     * @param int $limit : number of products to get
+     *
+     * @return array : array of products
+     */
+    public function getRandomProducts(int $limit = 10): array {
+      // create our random sql query with a limit as `$sql`
+      $sql = <<<SQL
+        SELECT * FROM `products`
+        WHERE deleted_at IS NULL
+        AND stock > 0
+        ORDER BY RAND()
+        LIMIT $limit
+      SQL;
+
+      // prepare the query
+      $query = $this->db->prepare($sql);
+
+      // execute the query
+      $query->execute();
+
+      // fetch the results in an associative array
+      $results = $query->fetchAll(PDO::FETCH_ASSOC);
+
+      // return the results
+      return $results;
+    }
 }
 
 

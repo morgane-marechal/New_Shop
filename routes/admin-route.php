@@ -179,3 +179,18 @@ $router->map('DELETE', '/admin/category/[i:categoryId]', function($categoryId) {
     $response = $adminController->categoryDelete($categoryId);
     echo $response; 
 });
+
+
+$router->map( 'GET', '/admin/category/create', function() {
+
+
+    require __DIR__ . '/../views/admin-categories-create-page.php';
+ });
+
+ $router->map( 'POST', '/admin/category/create', function() {
+    $name = $_POST['categoryName'];
+    $titre = $_POST['categoryTitre'];
+    $adminController = new AdminController();
+    $adminController->registerNewCategory($name, $titre);
+    require __DIR__ . '/../views/admin-categories-create-page.php';
+ });

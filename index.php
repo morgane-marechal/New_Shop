@@ -58,8 +58,9 @@ session_start();
 
 // defining some constants...
 
+const APP_NAME = 'boutique-en-ligne';
 // home or base directory of Maxaboom
-const MAXABOOM_HOME_DIR = '/boutique-en-ligne';
+const MAXABOOM_HOME_DIR = '/' . APP_NAME;
 
 
 
@@ -84,16 +85,21 @@ include __DIR__ . '/routes/home-route.php'; // <- home route
 include __DIR__ . '/routes/shop-route.php'; // <- shop route
 include __DIR__ . '/routes/api-route.php'; // <- api route
 include __DIR__ . '/routes/product-route.php'; // <- product route
+include __DIR__ . '/routes/search-route.php'; // <- search route
+include __DIR__ . '/routes/checkout-route.php'; // <- checkout route
 
 include __DIR__ . '/routes/login-route.php'; //<- login route
 include __DIR__ . '/routes/register-route.php'; //<- register route
 
 include __DIR__ . '/routes/address-route.php'; // <- address route
 include __DIR__ . '/routes/review-route.php'; // <- review route
+include __DIR__ . '/routes/cards-route.php'; // <- address route
 
 include __DIR__ . '/routes/admin-route.php'; // <- admin route
 include __DIR__ . '/routes/account-route.php'; // <- account route
 include __DIR__ . '/routes/component-route.php'; // <- component route
+include __DIR__ . '/routes/cart-route.php'; // <- cart route
+include __DIR__ . '/routes/likes-route.php'; // <- likes route
 
 
 

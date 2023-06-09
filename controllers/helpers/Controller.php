@@ -51,6 +51,8 @@ namespace Maxaboom\Controllers\Helpers;
 
 // use the `I18n` helper class
 use Maxaboom\Controllers\Helpers\I18n;
+// use the `Painter` helper class
+use Maxaboom\Controllers\Helpers\Painter;
 
 
 
@@ -77,7 +79,7 @@ abstract class Controller {
   // Defining some public properties...
   
   public I18n $i18n;
-
+  public Painter $painter;
 
   // Defining some private properties...
 
@@ -114,6 +116,7 @@ abstract class Controller {
 
     // Instantiate the `I18n` helper class and assign it to the `$i18n` property
     $this->i18n = new I18n($this->lang);
+    $this->painter = new Painter($this->theme);
 
   }
   
@@ -176,7 +179,27 @@ abstract class Controller {
 
 
 
+  // PRIVATE SETTERS
+  // PRIVATE GETTERS
+
   // PRIVATE METHODS
+
+  /**
+   * Redirects the user to the specified `url`
+   *
+   * @param ?string $url : the url to redirect to
+   *
+   * @return void
+   * @protected
+   */
+  protected function redirect(?string $url = null) {
+    // Modify the `url`
+    $url = is_null($url) ? _NAME : APP_NAME . $url;
+
+    // redirect the user to the given `url`
+    header('Location: /' . $url);
+    exit;
+  }
 
   /**
    * Method used to create the `config` session array if it doesn't exist
@@ -202,9 +225,6 @@ abstract class Controller {
       
     }
   }
-
-  // PRIVATE SETTERS
-  // PRIVATE GETTERS
 
 
 }
