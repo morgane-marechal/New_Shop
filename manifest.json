@@ -1,0 +1,33 @@
+{
+  "name": "Maxaboom",
+  "short_name": "maxaboom",
+  "description": "A fun and dynamic online store that offers a wide variety of musical instruments. From guitars and drums to keyboards, microphones and trumpets.",
+  "start_url": "/",
+  "display": "standalone",
+  "theme_color": "#FFDCBA",
+  "background_color": "#FFDCBA",
+  "icons": [
+    {
+
+      "src": "assets/images/manifest/icon-96x96.png",
+      "sizes": "96x96",
+      "type": "image/png"
+    },
+    {
+
+      "src": "assets/images/manifest/icon-144x144.png",
+      "sizes": "144x144",
+      "type": "image/png"
+    },
+    {
+      "src": "assets/images/manifest/icon-192x192.png",
+      "sizes": "192x192",
+      "type": "image/png"
+    },
+    {
+      "src": "assets/images/manifest/icon-512x512.png",
+      "sizes": "512x512",
+      "type": "image/png"
+    }
+  ]
+}

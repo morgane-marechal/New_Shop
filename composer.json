@@ -1,0 +1,43 @@
+{
+    "name": "abraham-ukachi/boutique-en-ligne",
+    "description": "Maxaboom is a fun and dynamic online store that offers a wide variety of musical instruments\u001b",
+    "type": "project",
+    "license": "MIT",
+    "autoload": {
+        "psr-4": {
+            "Maxaboom\\Routes\\": "routes/",
+
+            "Maxaboom\\Models\\": "models/",
+            "Maxaboom\\Models\\Helpers\\": "models/helpers/",
+
+            "Maxaboom\\Views\\": "views/",
+            "Maxaboom\\Views\\Components\\": "views/components/",
+
+            "Maxaboom\\Controllers\\": "controllers/",
+            "Maxaboom\\Controllers\\Helpers\\": "controllers/helpers/"
+            
+        }
+    },
+    "authors": [
+        {
+            "name": "abraham-ukachi",
+            "email": "abraham.ukachi@laplateforme.io"
+        },
+        {
+            "name": "axel-vair",
+            "email": "axel.vair@laplateforme.io"
+        },
+        {
+            "name": "morgane-marechal",
+            "email": "morgane.marechal@laplateforme.io"
+        },
+        {
+            "name": "catherine-tranchand",
+            "email": "catherine.tranchand@laplateforme.io"
+        }
+    ],
+    "require": {
+        "altorouter/altorouter": "^2.0",
+        "fakerphp/faker": "^1.21"
+    }
+}
