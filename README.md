@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 <p align="center">
   <!-- Light Mode for Maxaboom logo -->
   <a href="https://abraham-ukachi.students-laplateforme.io/boutique-en-ligne/#gh-light-mode-only" target="_blank">
@@ -473,3 +474,7 @@ open http://localhost/boutique-en-ligne
 
 **MPD** / Entity Relationship Diagram of Maxaboom Database 
 ![MLD - Maxaboom - Database](./.github/screenshots/maxaboom_db.png) 
+=======
+# New_Shop
+new version of 'boutique en ligne' project
+>>>>>>> 6f2953733cbaec482cba8a2c019d927c1a022eea
