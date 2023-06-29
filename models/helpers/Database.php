@@ -100,17 +100,10 @@ class Database {
   private const DOTENV_PATH = __DIR__  . '/.env';
 
   // private properties
-<<<<<<< HEAD
   private string $db_host;
   private string $db_username;
   private string $db_password;
   private int $db_port;
-=======
-  private string $db_host = '127.0.0.1';
-  private string $db_username = 'root';
-  private string $db_password = '';
-  private int $db_port = -1;
->>>>>>> 4ac5c4f0e6ad10e0f1cae58c4d55ebf24990e4ec
 
   // protected properties
   protected string $db_name;
