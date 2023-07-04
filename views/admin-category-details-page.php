@@ -109,7 +109,7 @@
                 <!-- Title -->
                 <h2 class="app-title">Sous-catégories</h2>
                 <!-- Subtitle -->
-                <h3 class="app-subtitle"><?=$oneCategoryTitre?></h3>
+                <h3 class="app-subtitle"><?=$oneCategoryTitle?></h3>
               </div>
             </div>
             <!-- End of App Bar -->
@@ -135,8 +135,8 @@
             <?php for ($i = 0; $i <count($specificSubCategories); $i++): ?>
 
               <li id='' class="sub-category">
-                <span><?=$specificSubCategories[$i]['titre']?></span>
-                <!-- <button id="<?=$specificSubCategories[$i]['id']?>" class='deletecategory'>Supprimer</button> -->
+                <span><?=$specificSubCategories[$i]['title']?></span>
+                <button id="<?=$specificSubCategories[$i]['id']?>" class='deletecategory'>Supprimer</button>
               </li>
 
             <?php endfor;?>
@@ -148,7 +148,7 @@
             <form  id='subCategoriesForm' action='' method='post' data-category-id='<?= $categoryId ?>'>
               <div class="input-wrapper">
                   <label raised for="subcategory">Ajouter une sous-catégorie</label>
-                  <input id="subcategorytitre" class="subcategory" name="subcategoryTitre" type="text" value="">                <span class="input-indicator"><span bar></span><span val></span>
+                  <input id="subcategorytitle" class="subcategory" name="subcategoryTitle" type="text" value="">                <span class="input-indicator"><span bar></span><span val></span>
                   <span class="input-indicator"><span bar></span><span val></span>
               </div>
 

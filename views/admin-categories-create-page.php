@@ -129,7 +129,7 @@
             <form  id='categoriesForm' action='' method='post'>
               <div class="input-wrapper">
                   <label raised for="category">Ajouter une catégorie</label>
-                  <input id="categorytitre" class="category" name="categoryTitre" type="text" value="">                <span class="input-indicator"><span bar></span><span val></span>
+                  <input id="categorytitle" class="category" name="categoryTitle" type="text" value="">                <span class="input-indicator"><span bar></span><span val></span>
                   <span class="input-indicator"><span bar></span><span val></span>
               </div>
 

@@ -35,6 +35,7 @@ if (categoriesForm){
 //ADD SUBCATEGORIES
 
 let subCategoriesForm = document.getElementById('subCategoriesForm');
+let subCategoryTitleElement = document.getElementById('subcategorytitle');
 if (subCategoriesForm){
     subCategoriesForm.addEventListener('submit', async (event) => {
     event.preventDefault();
@@ -64,17 +65,17 @@ if (subCategoriesForm){
 
         let template = `
         <li id='' class="sub-category">
-            <span>${form.get('subcategoryTitre')}</span>
+            <span>${subCategoryTitleElement.value}</span>
             <button id="" class='deletecategory'>Supprimer</button>
         </li>`;
 
         subCategories.insertAdjacentHTML('beforeend', template);
 
 
-        let subcategorytitre=document.getElementById("subcategorytitre");
-        let subcategoryname=document.getElementById("subcategoryname");
-        subcategorytitre.value='';
-        subcategoryname.value='';
+        //let subcategorytitle=document.getElementById("subcategorytitle");
+        //let subcategoryname=document.getElementById("subcategoryname");
+        // subcategorytitle.value='';
+        // subcategoryname.value='';
     }
 
     });

@@ -111,21 +111,21 @@ class AdminController{
 
     public function showOneCategory($categoryId){
         $oneCategoryName=$this->productCategory->getCategoryById($categoryId);
-        $oneCategoryTitre=$this->productCategory->getCategoryTitreById($categoryId);
+        $oneCategoryTitle=$this->productCategory->getCategoryTitleById($categoryId);
         $specificSubCategories=$this->productCategory->getSubcategoriesByCategoryId($categoryId);
         require __DIR__ . '/../views/admin-category-details-page.php';   
     }
 
-    public function registerNewSubcategory($name, $titre, $categoryId){
-        $newSubCategory=$this->productCategory->registerSubCategory($name, $titre,$categoryId);
+    public function registerNewSubcategory($name, $title, $categoryId){
+        $newSubCategory=$this->productCategory->registerSubCategory($name, $title,$categoryId);
     }
 
     public function categoryDelete($idSubCategory){
         return $this->productCategory->deleteSubCategory($idSubCategory);
     }
 
-    public function registerNewCategory($name, $titre){
-        $newCategory=$this->productCategory->registerCategory($name, $titre);
+    public function registerNewCategory($name, $title){
+        $newCategory=$this->productCategory->registerCategory($name, $title);
     }
 
 

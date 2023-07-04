@@ -56,9 +56,9 @@ class CheckoutController extends Controller
     }
 
     public function registerAllInformations($delivery, $address, $addressComplement, $city, $postalCode, $country, $nbCard, $expiration, $cvv){
-        $titre = "nouvelle adresse";
+        $title = "nouvelle adresse";
         $user_id = $this->user->id;
-        $this->address->newAddress($titre, $address, $addressComplement, $postalCode, $city, $country, $user_id);
+        $this->address->newAddress($title, $address, $addressComplement, $postalCode, $city, $country, $user_id);
         $this->card->registerCard($this->user->id, 'VISA', $nbCard, $expiration, $cvv);
 
     }

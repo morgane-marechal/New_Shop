@@ -82,7 +82,7 @@ let cvv = document.getElementById('cvvValue');
 address.addEventListener('blur', (ev) => {
     let element = ev.target;
     if (element.validity.valueMissing) {
-        mbApp.showInputError(element, "Veuillez renseigner un titre ! ")
+        mbApp.showInputError(element, "Veuillez renseigner un title ! ")
     }
 })
 address.addEventListener('blur', (ev) => {

@@ -17,7 +17,7 @@ $addressUser = $newaddress->getAddressByUser(3);
 
 echo "<br>";
 /* newAddress OK
-$titre = "Addresse boulot";
+$title = "Addresse boulot";
 $address = "01 rue des larbins";
 $complement = "immeuble B";
 $postal_code = 13004;
@@ -25,5 +25,5 @@ $city = "Marseille";
 $country = "FRANCE";
 $user_id = 1;
 $type = "livraison";
-$newAddress = $newaddress->newAddress($titre, $address, $complement, $postal_code, $city, $country, $user_id, $type);
+$newAddress = $newaddress->newAddress($title, $address, $complement, $postal_code, $city, $country, $user_id, $type);
 */

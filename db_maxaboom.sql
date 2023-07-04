@@ -25,7 +25,7 @@ INSERT INTO users (firstname, lastname, mail, password, dob, created_at, user_ro
 CREATE TABLE addresses
 (
     id int PRIMARY KEY NOT NULL AUTO_INCREMENT,
-    titre varchar(100),
+    title varchar(100),
     address varchar(100),
     address_complement varchar(100),
     postal_code int,
@@ -35,7 +35,7 @@ CREATE TABLE addresses
     type varchar(100)
 );
 
-INSERT INTO addresses (titre, address, address_complement, postal_code, city, country, user_id, type)
+INSERT INTO addresses (title, address, address_complement, postal_code, city, country, user_id, type)
  VALUES
  ('Maison', '02 rue de la fontaine', '5e batiment', '13001', 'Marseille', 'FRANCE', 1, 'livraison'),
  ('Boulot', '69 rue Camas', '', '13006', 'Marseille', 'FRANCE', 2, 'livraison'),
@@ -48,11 +48,11 @@ INSERT INTO addresses (titre, address, address_complement, postal_code, city, co
 /*-------------------categories tables----------*/
 CREATE TABLE categories(
     id int PRIMARY KEY NOT NULL AUTO_INCREMENT,
-    titre varchar(100),
+    title varchar(100),
     name varchar(100)
 );
 
- INSERT INTO categories (titre, name)
+ INSERT INTO categories (title, name)
  VALUES
  ('pianos', 'pianos'),
  ('guitares', 'guitars'),
@@ -66,12 +66,12 @@ CREATE TABLE categories(
 
  CREATE TABLE sub_categories(
     id int PRIMARY KEY NOT NULL AUTO_INCREMENT,
-    titre varchar(100),
+    title varchar(100),
     name varchar(100),
     category_id int
 );
 
- INSERT INTO sub_categories (titre, name, category_id)
+ INSERT INTO sub_categories (title, name, category_id)
  VALUES
  ('pianos droits', 'upright-piano', 1),
  ('pianos à queue', 'grand-piano', 1),

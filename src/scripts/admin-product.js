@@ -62,9 +62,9 @@ if(categorySelect){
     subCategoriesElement.innerHTML = "<option value=''>Choisissez une sous-categorie</option>";
 
     subcategories.forEach(subcategory => {
-        let optionTemplate = `<option value='${subcategory.id}'>${subcategory.titre}</option>`;
+        let optionTemplate = `<option value='${subcategory.id}'>${subcategory.title}</option>`;
         subCategoriesElement.insertAdjacentHTML('beforeend', optionTemplate);
-        console.log(subcategory.titre);
+        console.log(subcategory.title);
     });
 });
 

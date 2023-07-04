@@ -42,16 +42,16 @@ class Category extends Database
         return $result['name'];
     }
 
-    public function getCategoryTitreById(int $categoryId): string {
-        $allProducts = $this->db->prepare("SELECT titre FROM categories WHERE id = $categoryId");
+    public function getCategoryTitleById(int $categoryId): string {
+        $allProducts = $this->db->prepare("SELECT title FROM categories WHERE id = $categoryId");
         $allProducts->execute([
         ]);
         $result = $allProducts->fetch(PDO::FETCH_ASSOC);
-        return $result['titre'];
+        return $result['title'];
     }
 
     public function getSubcategoriesByCategoryId(int $categoryId) {
-        $subCategorie = $this->db->prepare("SELECT id, name, titre FROM sub_categories WHERE category_id=$categoryId");
+        $subCategorie = $this->db->prepare("SELECT id, name, title FROM sub_categories WHERE category_id=$categoryId");
         $subCategorie->execute([]);
         $result = $subCategorie->fetchAll(PDO::FETCH_ASSOC);
         return $result;
@@ -97,13 +97,13 @@ class Category extends Database
         }
     }
 
-    public function registerSubCategory($name, $titre, $categoryId){
-        $sql = "INSERT INTO sub_categories (name, titre, category_id)
-                VALUES (:name, :titre, :category_id)";
+    public function registerSubCategory($name, $title, $categoryId){
+        $sql = "INSERT INTO sub_categories (name, title, category_id)
+                VALUES (:name, :title, :category_id)";
         $sql_exe = $this->db->prepare($sql);
         $sql_exe->execute([
             'name' => htmlspecialchars($name),
-            'titre' => htmlspecialchars($titre),
+            'title' => htmlspecialchars($title),
             'category_id' => $categoryId,
         ]);         
         if ($sql_exe) {
@@ -128,13 +128,13 @@ class Category extends Database
     }
 
 
-    public function registerCategory($name, $titre){
-        $sql = "INSERT INTO categories (name, titre)
-                VALUES (:name, :titre)";
+    public function registerCategory($name, $title){
+        $sql = "INSERT INTO categories (name, title)
+                VALUES (:name, :title)";
         $sql_exe = $this->db->prepare($sql);
         $sql_exe->execute([
             'name' => htmlspecialchars($name),
-            'titre' => htmlspecialchars($titre),
+            'title' => htmlspecialchars($title),
         ]);         
         if ($sql_exe) {
             echo json_encode(['response' => 'ok', 'reussite' => 'Nouvelle catégorie enregistrée']);

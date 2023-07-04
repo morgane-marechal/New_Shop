@@ -170,8 +170,8 @@ $router->map( 'GET', '/admin/category/[i:categoryId]', function($categoryId){
 $router->map( 'POST', '/admin/category/[i:categoryId]', function($categoryId){
     $adminController = new AdminController();
     $name = $_POST['subcategoryName'];
-    $titre = $_POST['subcategoryTitre'];
-    $adminController->registerNewSubcategory($name, $titre,$categoryId);
+    $title = $_POST['subcategoryTitle'];
+    $adminController->registerNewSubcategory($name, $title,$categoryId);
 });
 
 $router->map('DELETE', '/admin/category/[i:categoryId]', function($categoryId) {
@@ -189,8 +189,8 @@ $router->map( 'GET', '/admin/category/create', function() {
 
  $router->map( 'POST', '/admin/category/create', function() {
     $name = $_POST['categoryName'];
-    $titre = $_POST['categoryTitre'];
+    $title = $_POST['categoryTitle'];
     $adminController = new AdminController();
-    $adminController->registerNewCategory($name, $titre);
+    $adminController->registerNewCategory($name, $title);
     require __DIR__ . '/../views/admin-categories-create-page.php';
  });
