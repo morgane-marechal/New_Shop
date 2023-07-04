@@ -302,7 +302,7 @@
                     <div class="hero-price-tag pop-in horizontal flex-layout">
                       <div details class="vertical flex-layout flex">
                         <span class="hero-product-name"><?= $heroProduct['name'] ?></span>
-                        <span class="hero-price-tag-value"><?= number_format($heroProduct['price'] / 100, 2) ?> €</span>
+                        <span class="hero-price-tag-value"><?= number_format($heroProduct['price'],2, ',', ' ') ?> €</span>
                       </div>
 
                       <div icon class="vertical flex-layout centered">
@@ -459,7 +459,7 @@
                     <div class="product-name"><?= $product['name'] ?></div>
 
                     <!-- Product Price -->
-                    <div class="product-price"><?= number_format($product['price'] / 100, 2) ?> €</div>
+                    <div class="product-price"><?= number_format($product['price'], 2, ',', ' ') ?> €</div>
 
                     <!-- Add to Cart Button -->
                     <button class="add-to-cart-btn horizontal flex-layout centered" contained expands shrinks 
@@ -547,7 +547,7 @@
                     <div class="product-name"><?= $product['name'] ?></div>
 
                     <!-- Product Price -->
-                    <div class="product-price"><?= number_format($product['price'] / 100, 2) ?> €</div>
+                    <div class="product-price"><?= number_format($product['price'], 2, ',', ' ') ?> €</div>
 
                     <!-- Add to Cart Button -->
                     <button class="add-to-cart-btn horizontal flex-layout centered" contained expands shrinks 
@@ -635,7 +635,7 @@
                     <div class="product-name"><?= $product['name'] ?></div>
 
                     <!-- Product Price -->
-                    <div class="product-price"><?= number_format($product['price'] / 100, 2) ?> €</div>
+                    <div class="product-price"><?= number_format($product['price'],2, ',', ' ') ?> €</div>
 
                     <!-- Add to Cart Button -->
                     <button class="add-to-cart-btn horizontal flex-layout centered" contained expands shrinks 
