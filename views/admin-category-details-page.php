@@ -62,7 +62,7 @@
   <!-- <link rel="stylesheet" href="assets/animations/slide-from-down-animation.css"> -->
 
   <!-- Stylesheet -->
-  <!-- <link rel="stylesheet" href="assets/stylesheets/home-styles.css"> -->
+  <link rel="stylesheet" href="assets/stylesheets/admin-category-details-styles.css">
 
   <!-- Script -->
   <script>
