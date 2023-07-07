@@ -178,7 +178,7 @@ class Product extends Database
     public function updateProduct($id, $name,$description, $price, $category_id, $sub_category_id, $stock){
         $update_at = date('Y-m-d H:i:s');
         $sql = "UPDATE products SET name = :name, description = :description, price = :price, category_id = :category_id,
-        sub_category_id = :sub_category_id, update_at = :update_at, stock = :stock WHERE id = :id";
+        sub_category_id = :sub_category_id, updated_at = :updated_at, stock = :stock WHERE id = :id";
         $sql_exe = $this->db->prepare($sql);
         $sql_exe->execute([
             'id' => $id,
@@ -187,7 +187,7 @@ class Product extends Database
             'price' => htmlspecialchars($price),
             'category_id' => htmlspecialchars($category_id),
             'sub_category_id' => htmlspecialchars($sub_category_id),
-            'update_at' => $update_at,
+            'updated_at' => $update_at,
             'stock' => htmlspecialchars($stock)
         ]);         
         if ($sql_exe) {

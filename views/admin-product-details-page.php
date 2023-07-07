@@ -138,11 +138,11 @@
             <div class='container'>
 
               <h1>Modifier le produit</h1>
-            <h2><?php echo $theProduct['name'] ?></h2>
+            <h2><?php echo $theProduct['productName'] ?></h2>
 
             <?php
 
-            // var_dump($theProduct);
+            //var_dump($theProduct);
             // echo $theCategoryId;
             // echo $theProductCategoryName;
 
@@ -152,7 +152,7 @@
                 
                     <div class="input-wrapper">
                         <label raised for="productname">Nom</label>
-                        <input id="productname" class="productupdate" name="productname" type="text" value="<?php echo $theProduct['name'] ?>">
+                        <input id="productname" class="productupdate" name="productname" type="text" value="<?php echo $theProduct['productName'] ?>">
                         <span class="input-indicator"><span bar></span><span val></span>
                       </div>
                     <div class="input-wrapper">

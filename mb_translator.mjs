@@ -438,7 +438,7 @@ export class MaxaboomTranslator {
 
       } catch(err) { // <- If there's an error...
         // ...reject the promise
-        reject(stderr);
+        reject(err);
       }
 
     });
