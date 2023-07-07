@@ -49,9 +49,9 @@ class AdminController{
     public function showOneProductPage($productId): void {
 
         $theProduct = $this->productModel->getProductById($productId);
-        $theCategoryId = $theProduct['categories_id'];
+        $theCategoryId = $theProduct['category_id'];
         $theProductCategoryName = $this->productCategory->getCategoryById($theCategoryId);
-        $theSubCategoryId = $theProduct['sub_categories_id'];
+        $theSubCategoryId = $theProduct['sub_category_id'];
         $theProductSubCategoryName = $this->productCategory->getSubcategoryNameById($theSubCategoryId);
         require __DIR__ . '/../views/admin-product-details-page.php';
     }
