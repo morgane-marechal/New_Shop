@@ -1,0 +1,17 @@
+.category-link{
+    border:none;
+    text-transform: capitalize;
+
+}
+
+.category-link:hover{
+    color: #8B5000;
+}
+
+.product-category-link{
+    text-decoration: none;
+}
+
+.all-list{
+    list-style: none;
+}

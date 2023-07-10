@@ -57,6 +57,7 @@
     <link rel='stylesheet' href='assets/theme/color.css'>
     <link rel='stylesheet' href='assets/theme/typography.css'>
     <link rel='stylesheet' href='assets/theme/styles.css'>
+    <link rel='stylesheet' href='assets/stylesheets/shop.css'>
 
     <!-- Animations -->
     <!-- <link rel='stylesheet' href='assets/animations/fade-in-animation.css'> -->
@@ -137,7 +138,7 @@ require __DIR__ . '/components/side-bar.php';
     <!-- Nav Bar -->
     <!-- PHP: Include the `navBar` component -->
     <?php
-    $_GET['navbar_route'] = 'home';
+    $_GET['navbar_route'] = 'shop';
     $_GET['navbar_init'] = 'au';
     $_GET['navbar_connected'] = false; // TRUE if the user is connected
     $_GET['navbar_for_admin'] = false; // TRUE if the user is an admin
@@ -146,10 +147,10 @@ require __DIR__ . '/components/side-bar.php';
     ?>
     <!-- End of Nav Bar -->
 
-    <ul style='overflow:scroll'>
+    <ul class="all-list" style='overflow:scroll'>
         <!--  CATEGORIES LIST HERE -->
         <?php foreach ($categories as $category): ?>
-            <li>
+            <li class="product-category-link">
                 <button class="category-link" onclick="handleCategoryLinkClick(this)" data-category-id="<?=$category['id'] ?>" data-category-name="<?=$category['name']?>" <?= ($category['name'] === $this->categoryName) ? 'active': '' ?>> <?=$category['name'] ?></button>
             </li>
         <?php endforeach; ?>

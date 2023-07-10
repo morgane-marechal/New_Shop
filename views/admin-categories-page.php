@@ -138,7 +138,7 @@
         <div content>
           <div id='container'>
 
-            <h1>Les catégories</h1>
+            <div class="title-category"><h1>Les catégories</h1></div>
             <?php 
             for ($i = 0; $i <count($categories); $i++) {
               echo "<div id=".$categories[$i]['id']." data-product-id=".$categories[$i]['id']." class='update-category'>".$categories[$i]['name'].
@@ -146,7 +146,7 @@
             }
             ?>
 
-          <h1>Les sous-catégories</h1>
+            <div class="title-category"><h1>Les sous-catégories</h1></div>
             <?php
             for ($i = 0; $i <count($subcategories); $i++) {
               echo "<div id=".$subcategories[$i]['id']." data-product-id=".$subcategories[$i]['id']." class='update-category'>".$subcategories[$i]['name'].
