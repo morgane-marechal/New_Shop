@@ -1,0 +1,38 @@
+
+.deleteUser {
+    border: none;
+    margin-left: 15px;
+    color: white;
+    background-color: #8B5000;
+}
+
+.update-user a{
+    margin-left:15px;
+}
+
+.deleteproduct {
+    border: none;
+    margin-left: 15px;
+    color: white;
+    background-color: #8B5000;
+}
+
+.update-product a{
+    margin-left:15px;
+}
+
+.update-category{
+    margin-left:15px;
+    text-transform: capitalize;
+}
+
+.deletecategory {
+    border: none;
+    margin-left: 15px;
+    color: white;
+    background-color: #8B5000;
+}
+
+.update-category a{
+    margin-left:15px;
+}

@@ -60,6 +60,8 @@
   <link rel="stylesheet" href="assets/theme/color.css">
   <link rel="stylesheet" href="assets/theme/typography.css">
   <link rel="stylesheet" href="assets/theme/styles.css">
+  <link rel="stylesheet" href="assets/stylesheets/admin-style.css">
+
   
   <!-- Animations -->
   <!-- <link rel="stylesheet" href="assets/animations/fade-in-animation.css"> -->
