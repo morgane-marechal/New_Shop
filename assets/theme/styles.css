@@ -369,7 +369,7 @@ body > aside {
   box-sizing: border-box;
   flex: 1;
   overflow: scroll;
-  scroll-behavior: smooth;
+  scroll-behavior: smooth; 
 }
 
 .app-layout.view {

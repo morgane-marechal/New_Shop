@@ -119,20 +119,33 @@ require __DIR__ . '/components/side-bar.php';
                     <h3 class='app-subtitle'>Maxaboom, la référence des instruments de musique !</h3>
                 </div>
             </div>
+
+            <div content>
+                <div class='app-layout'>
+                    <h1>Shop @ Maxaboom!</h1>
+                    <p>welcome to the shop page of <b>Maxaboom</b> 🛍</p>
+                    <a href='home'>Go back to <b>home page</b></a>
+                </div>
+            </div>
+            <span class='divider horizontal bottom'></span>
+            </header>
+
+            <ul class="all-list" style='overflow:scroll'>
+        <!--  CATEGORIES LIST HERE -->
+                <?php foreach ($categories as $category): ?>
+                    <li class="product-category-link">
+                    <a href="link address"></a>
+                        <button class="category-link" onclick="handleCategoryLinkClick(this)" data-category-id="<?=$category['id'] ?>" data-category-name="<?=$category['name']?>" <?= ($category['name'] === $this->categoryName) ? 'active': '' ?>> <?=$category['name'] ?></button>
+                    </li>
+                <?php endforeach; ?>
+            </ul>
             <!-- End of App Bar -->
 
             <!-- Horizontal Divider -->
-            <span class='divider horizontal bottom'></span>
-        </header>
+        
 
         <!-- [content] -->
-        <div content>
-            <div class='app-layout'>
-                <h1>Shop @ Maxaboom!</h1>
-                <p>welcome to the shop page of <b>Maxaboom</b> 🛍</p>
-                <a href='home'>Go back to <b>home page</b></a>
-            </div>
-        </div>
+
     </div>
 
     <!-- Nav Bar -->
@@ -147,14 +160,7 @@ require __DIR__ . '/components/side-bar.php';
     ?>
     <!-- End of Nav Bar -->
 
-    <ul class="all-list" style='overflow:scroll'>
-        <!--  CATEGORIES LIST HERE -->
-        <?php foreach ($categories as $category): ?>
-            <li class="product-category-link">
-                <button class="category-link" onclick="handleCategoryLinkClick(this)" data-category-id="<?=$category['id'] ?>" data-category-name="<?=$category['name']?>" <?= ($category['name'] === $this->categoryName) ? 'active': '' ?>> <?=$category['name'] ?></button>
-            </li>
-        <?php endforeach; ?>
-    </ul>
+
 
     <!-- SUBCATEGORY LIST HERE -->
     <nav id="subCategoriesList"></nav>

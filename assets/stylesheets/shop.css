@@ -1,7 +1,7 @@
 .category-link{
     border:none;
     text-transform: capitalize;
-
+    background-color: white;
 }
 
 .category-link:hover{
@@ -13,5 +13,28 @@
 }
 
 .all-list{
+    list-style: none;
+    display: flex;
+}
+
+#subCategoriesList{
+    display:flex;
+    list-style: none;
+}
+
+.sub-category-link{
+    border:none;
+    list-style: none;
+    text-transform: capitalize;
+    background-color: white;
+}
+
+.showProduct{
+    border:none;
+    margin-left:15px;
+    background-color: white;
+}
+
+li{
     list-style: none;
 }
