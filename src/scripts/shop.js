@@ -92,7 +92,7 @@ function getProductTemplate(productId, productImage, productName, productDescrip
         <img src="assets/images/products/${productImage}" width="300" height="300"/>
         <h3>${productName}</h3>
         <p> ${productDescription} </p>
-       <div><span>Prix : ${productPrice}</span><button><a href="/boutique-en-ligne/product/${productId}">Voir le produit</a></button></div>
+       <div class="productPrice"><span class="showPrice">Prix : ${productPrice}</span><button class="showProduct"><a href="/boutique-en-ligne/product/${productId}">Voir le produit</a></button></div>
     </div>
     `
 }
