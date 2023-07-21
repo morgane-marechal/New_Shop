@@ -191,8 +191,8 @@ class Card extends Model {
 
     public function registerCard($user_id, string $type, $nbCard, $expiration, $cvv)
     {
-        $sql = "INSERT INTO cards (user_id, type, card_no, expiry_month, expiry_year, CVV)
-                VALUES (:user_id, :type, :card_no, :expiry_month, :expiry_year, :cvv)";
+        $sql = "INSERT INTO cards (user_id, type, card_no, expiry_month, expiry_year, CVV, created_at)
+                VALUES (:user_id, :type, :card_no, :expiry_month, :expiry_year, :cvv, NOW())";
         $sql_exe = $this->db->prepare($sql);
         $expiry_month = (int) explode('/', $expiration)[0];
         $expiry_year = (int) explode('/', $expiration)[1];

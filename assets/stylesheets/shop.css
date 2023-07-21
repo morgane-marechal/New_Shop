@@ -29,6 +29,13 @@
     background-color: white;
 }
 
+.sub-category-link:hover{
+    border:none;
+    list-style: none;
+    text-transform: capitalize;
+    color: #8B5000;
+}
+
 .showProduct{
     border:none;
     margin-left:15px;

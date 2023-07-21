@@ -281,7 +281,7 @@
     <?php if ($totalProducts > 0): ?> 
     
     <div class="checkout-btn-wrapper vertical flex-layout centered">
-      <button id="checkoutButton" contained><?= $this->i18n->getString('checkout') ?></button>
+      <a href="checkout" role="button" id="checkoutButton" contained><?= $this->i18n->getString('checkout') ?></a>
       
       <span class="divider horizontal top"></span>
     </div>
