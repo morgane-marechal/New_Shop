@@ -104,6 +104,7 @@ class ProductController extends controller
         $productReview = $this->reviewModel->getReviewsByProductId($productId);
         $user = $this->user->getInitials();
   
+        //var_dump($product);
         require __DIR__ . '/../views/product-page.php';
 
         // var_dump($product);

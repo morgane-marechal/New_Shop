@@ -15,6 +15,16 @@ class AdminController{
         $this->productModel = new Product();
         $this->productCategory = new Category();
         $this->userModel = new User();
+
+        if (!$this->userModel->isAdmin())  {
+            // echo "you are not an administrator";
+
+            header('Location: home');
+            exit;
+        } else {
+            // echo "you are an administrator";
+        }
+
     }
 
     //pour enregistrer un nouveau produit

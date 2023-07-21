@@ -81,17 +81,19 @@
 <!-- End of HEAD -->
 <body class="theme light" fullbleed>
 
-  <!-- Side Bar -->
-    <!-- PHP: Include the `sideBar` component -->
-    <?php 
+ 
+
+      <!-- Side Bar -->
+  <!-- PHP: Include the `sideBar` component -->
+  <?php 
     $_GET['sidebar_route'] = 'admin'; 
-    $_GET['sidebar_init'] = 'au'; 
-    $_GET['sidebar_connected'] = false; // TRUE if the user is connected
-    $_GET['sidebar_for_admin'] = false; // TRUE if the user is an admin 
+    $_GET['sidebar_init'] = $this->userModel->getInitials(); 
+    $_GET['sidebar_connected'] = $this->userModel->isConnected(); // TRUE if the user is connected
+    $_GET['sidebar_for_admin'] = $this->userModel->isAdmin(); // TRUE if the user is an admin 
 
     require __DIR__ . '/components/side-bar.php';
-    ?>
-    <!-- End of Side Bar -->
+  ?>
+  <!-- End of Side Bar -->
 
 
   <!-- Main part -->

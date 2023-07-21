@@ -349,7 +349,14 @@ validateBtn.addEventListener('click', async (ev) => {
     let responseData = await response.json();
     if (responseData.success) {
         mbApp.showToast({message: "Vos informations ont été enregitrées!", type: SUCCESS_TOAST}, 3);
-
+        mbApp.openDialog({
+            title: 'Order Successful!!',
+            message: 'Your order has been registered. Thank you for your purchase',
+            confirmBtnText: 'Continue Shopping',
+            cancelBtnText: 'Go Home',
+            onConfirm: () => location.href = "",
+            onCancel: () => location.href = ""
+        });
     }
 })
 
@@ -395,7 +402,7 @@ cardBtnEls.forEach(btnEl => {
         id_card.value = responseData.id;
         nbCard.value = responseData.card_no;
         expiration.value = `${responseData.expiry_month}/${responseData.expiry_year}`;
-        cvv.value = responseData.CVV;
+        cvv.value = responseData.cvv;
 
         nbCard.dispatchEvent(new CustomEvent('input'));
 

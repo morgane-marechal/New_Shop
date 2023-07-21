@@ -102,6 +102,7 @@ $defaultSidebarTitles = [
   'likes' => $hc->i18n->getString('likesHint'),
   'users' => $hc->i18n->getString('usersHint'),
   'products' => $hc->i18n->getString('usersHint'),
+  'categories' => $hc->i18n->getString('usersHint'),
   'search' => $hc->i18n->getString('searchHint'),
 ];
 
@@ -116,6 +117,7 @@ $defaultSidebarLabels = [
   'likes' => $hc->i18n->getString('likes'),
   'users' => $hc->i18n->getString('users'),
   'products' => $hc->i18n->getString('products'),
+  'categories' => $hc->i18n->getString('categories'),
   'search' => $hc->i18n->getString('search'),
 ];
 
@@ -162,7 +164,7 @@ $sidebarLabels = $_GET['sidebar_labels'] ?? $defaultSidebarLabels;
   <!-- End of Dashboard Nav-Link -->
 
   <!-- Users - Nav-Link -->
-  <a title="<?= $sidebarTitles['users'] ?>" href="users" class="nav-link" <?= ($sidebarRoute == 'users') ? 'active' : '' ?>>
+  <a title="<?= $sidebarTitles['users'] ?>" href="admin/users" class="nav-link" <?= ($sidebarRoute == 'users') ? 'active' : '' ?>>
     <span class="material-icons nav-icon">people</span>
     <span class="nav-label"><?= $sidebarLabels['users'] ?></span>
   </a>
@@ -170,11 +172,19 @@ $sidebarLabels = $_GET['sidebar_labels'] ?? $defaultSidebarLabels;
 
 
   <!-- Products - Nav-Link -->
-  <a title="<?= $sidebarTitles['products'] ?>" href="products" class="nav-link" <?= ($sidebarRoute == 'products') ? 'active' : '' ?>>
+  <a title="<?= $sidebarTitles['products'] ?>" href="admin/products" class="nav-link" <?= ($sidebarRoute == 'products') ? 'active' : '' ?>>
     <span class="material-icons nav-icon">shopping_bag</span>
     <span class="nav-label"><?= $sidebarLabels['products'] ?></span>
   </a>
   <!-- End of Products Nav-Link -->
+
+
+  <!-- Categories - Nav-Link -->
+  <a title="<?= $sidebarTitles['categories'] ?>" href="admin/categories" class="nav-link" <?= ($sidebarRoute == 'categories') ? 'active' : '' ?>>
+    <span class="material-icons nav-icon">category</span>
+    <span class="nav-label"><?= $sidebarLabels['categories'] ?></span>
+  </a>
+  <!-- End of Categories Nav-Link -->
 
 
   <span class="divider horizontal"></span>

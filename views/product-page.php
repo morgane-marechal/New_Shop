@@ -63,7 +63,7 @@
     <!-- <link rel='stylesheet' href='assets/animations/slide-from-down-animation.css'> -->
 
     <!-- Stylesheet -->
-    <!-- <link rel='stylesheet' href='assets/stylesheets/home-styles.css'> -->
+    <link rel='stylesheet' href='assets/stylesheets/home-styles.css'>
 
     <!-- Script -->
     <script>
@@ -122,7 +122,7 @@ require __DIR__ . '/components/side-bar.php';
 
         <!-- [content] -->
         <div content>
-            <div class="container">
+            <div id="product" data-id="<?= $productId ?>" class="container">
                 <?php
                 $path = 'assets/images/products/';
                 echo '<img width="300" height="300" src="' . $path . $product['image'] . '">';
@@ -148,9 +148,13 @@ require __DIR__ . '/components/side-bar.php';
     <!-- End of Nav Bar -->
 
     <!-- Fab -->
-    <button class='fab vertical flex-layout centered' contained expands shrinks>
-        <span class='material-icons icon'>add_shopping_cart</span>
+    <!-- Add to Cart Button -->
+    <button id="addProductButton" class="add-to-cart-btn horizontal flex-layout centered" contained expands shrinks 
+    data-product-id="<?= $productId ?>"
+    >
+        <span class="material-icons icon">add_shopping_cart</span>
     </button>
+
     <!-- End of Fab -->
 
     <!-- Backdrop of MAIN -->
